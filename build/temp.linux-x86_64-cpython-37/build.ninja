@@ -1,0 +1,21 @@
+ninja_required_version = 1.3
+cxx = c++
+
+cflags = -pthread -B /home/gule/anaconda3/envs/yolox/compiler_compat -Wl,--sysroot=/ -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -I/home/gule/YOLOX/yolox/layers/csrc -I/home/gule/anaconda3/envs/yolox/lib/python3.7/site-packages/torch/include -I/home/gule/anaconda3/envs/yolox/lib/python3.7/site-packages/torch/include/torch/csrc/api/include -I/home/gule/anaconda3/envs/yolox/lib/python3.7/site-packages/torch/include/TH -I/home/gule/anaconda3/envs/yolox/lib/python3.7/site-packages/torch/include/THC -I/home/gule/anaconda3/envs/yolox/include/python3.7m -c
+post_cflags = -O3 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++14
+ldflags = 
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+
+
+build /home/gule/YOLOX/build/temp.linux-x86_64-cpython-37/home/gule/YOLOX/yolox/layers/csrc/cocoeval/cocoeval.o: compile /home/gule/YOLOX/yolox/layers/csrc/cocoeval/cocoeval.cpp
+build /home/gule/YOLOX/build/temp.linux-x86_64-cpython-37/home/gule/YOLOX/yolox/layers/csrc/vision.o: compile /home/gule/YOLOX/yolox/layers/csrc/vision.cpp
+
+
+
+
+
